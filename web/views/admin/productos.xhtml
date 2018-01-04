@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../templates/Template.xhtml">
+            <ui:define name="content">
+                <div class="panel panel-headline">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Mantenimiento de Productos</h2>
+                    </div>
+
+                    <h:form enctype="multipart/form-data">
+                        <p:commandButton value="Agregar Producto" actionListener="#{productosController.limpiarProducto()}" 
+                                         oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                        <p:separator/>
+                    </h:form>
+                    <h:form id="formProductos">
+                        <p:dataTable id="tablaProductos" paginator="true" paginatorPosition="bottom" rows="10" var="productos" 
+                                     value="#{productosController.listaProductos}" emptyMessage="No existen productos">
+                            <p:column headerText="NOMBRE">
+                                <h:outputText value="#{productos.nombre} "/>
+                            </p:column>
+                            <p:column headerText="PRECIO" width="10%">
+                                <h:outputText value="$ #{productos.precio}"/>
+                            </p:column>
+                            <p:column headerText="FECHA INGRESO" width="15%">
+                                <h:outputText value="#{productos.fechaIngreso}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" locale="ES" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="DESCRIPCION">
+                                <h:outputText value="#{productos.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="EXISTEN." width="10%">
+                                <h:outputText value="#{productos.existencias}"/>
+                            </p:column>
+                            <p:column headerText="ACCIONES" style="text-align: center" width="13%">
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{productosController.producto}" value="#{productos}"/>
+                                </p:commandButton>&nbsp;&nbsp;
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{productosController.producto}" value="#{productos}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    <h:form id="formAgregar" enctype="multipart/form-data">
+                        <p:dialog id="dlgAgregar" header="Agregar Cliente" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" 
+                                  hideEffect="explode" modal="true">              
+                            <p:panelGrid columns="2" style="margin: 0 auto;">
+
+                                <p:outputLabel value="Nombre:"/>
+                                <p:inputText value="#{productosController.producto.nombre}"/>
+
+                                <p:outputLabel value="Precio"/>
+                                <p:inputText value="#{productosController.producto.precio}"/>
+
+                                <p:outputLabel value="Fecha Ingreso:"/>
+                                <p:calendar value="#{productosController.producto.fechaIngreso}" locale="es"  disabled="true"/>
+
+                                <p:outputLabel value="Descripcion"/>
+                                <p:inputText value="#{productosController.producto.descripcion}"/>
+
+                                <p:outputLabel value="Existensias"/>
+                                <p:inputText value="#{productosController.producto.existencias}"/>
+
+                                <p:outputLabel value="Imagen"/>
+                                <h:panelGroup>
+                                    <p:fileUpload mode="simple" value="#{productosController.ifile}" />
+                                </h:panelGroup>
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{productosController.agregarProducto()}" 
+                                              update=":formProductos:tablaProductos" oncomplete="PF('dialogoAgregar').hide();" ajax="false"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="formModificar">
+                        <p:dialog id="dlgModificar" header="Modificar Cliente" widgetVar="dialogoModificar" resizable="false" 
+                                  showEffect="fade" hideEffect="explode" modal="true">          
+                            <p:panelGrid columns="2" style="margin: 0 auto;">
+
+                                <p:outputLabel value="Nombre:"/>
+                                <p:inputText value="#{productosController.producto.nombre}"/>
+
+                                <p:outputLabel value="Precio"/>
+                                <p:inputText value="#{productosController.producto.precio}"/>
+
+                                <p:outputLabel value="Fecha Ingreso:"/>
+                                <p:calendar value="#{productosController.producto.fechaIngreso}"      locale="es"  disabled="true"/>
+
+                                <p:outputLabel value="Descripcion"/>
+                                <p:inputText value="#{productosController.producto.descripcion}"/>
+
+                                <p:outputLabel value="Existensias"/>
+                                <p:inputText value="#{productosController.producto.existencias}"/>
+
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{productosController.modificarProducto()}" 
+                                              update=":formProductos:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEliminar">
+                        <p:dialog id="dlgEliminar" header="Eliminar Cliente" widgetVar="dialogoEliminar" resizable="false"
+                                  showEffect="fade" hideEffect="explode" modal="true">
+                            <h:outputText value="Desea eliminar este registro?"/>
+                            <p:commandButton  value="Si" actionListener="#{productosController.eliminarProducto()}" 
+                                              update=":formProductos:tablaProductos" oncomplete="PF('dialogoEliminar').hide();"/>
+                            <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+                </div>         
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

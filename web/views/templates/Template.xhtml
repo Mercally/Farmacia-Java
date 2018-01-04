@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Farmacia Esperanza | Tu salud es lo primero</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <h:outputStylesheet name="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="/assets/vendor/font-awesome/css/font-awesome.min.css"/>
+        <h:outputStylesheet name="/assets/vendor/linearicons/style.css"/>
+        <h:outputStylesheet name="/assets/vendor/chartist/css/chartist-custom.css"/>
+        <h:outputStylesheet name="/assets/css/main.css"/>
+        <h:outputStylesheet name="/assets/css/demo.css"/>
+        <!--<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png"/>-->
+        <link rel="icon" type="image/png" href="/Farmacia/resources/imgs/logo.png"/>
+    </h:head>
+    <h:body>	
+        <div id="wrapper">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-btn">
+                        <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+                        <h:graphicImage library="imgs" name="logo.png" />
+                         <p:outputLabel value=" &nbsp; 	&nbsp; Bienvenido &nbsp;" style="font-size: 200%;  font-weight: bold"/>
+                         <p:outputLabel value="#{loginController.usuario.nombre}!" style="font-size: 200%;  font-weight: bold"/>
+                    </div>
+                    <div id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--<li class="dropdown">
+                                <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                    <i class="lnr lnr-alarm"></i>
+                                    <span class="badge bg-danger">5</span>
+                                </a>
+                                <ul class="dropdown-menu notifications">
+                                    <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+                                    <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+                                    <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+                                    <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+                                    <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+                                    <li><a href="#" class="more">See all notifications</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Basic Use</a></li>
+                                    <li><a href="#">Working With Data</a></li>
+                                    <li><a href="#">Security</a></li>
+                                    <li><a href="#">Troubleshooting</a></li>
+                                </ul>
+                            </li>-->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="/assets/img/user.png" class="img-circle" alt=""/> 
+                                    <span>Opciones</span> <i class="icon-submenu lnr lnr-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+<!--                               <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+                                    <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+                                    <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>-->
+<!--                                    <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>-->
+                                    <h:form>
+                                        <p:menubar>
+                                            <p:menuitem value="Salir" icon="ui-icon-circle-minus" 
+                                                        action="#{loginController.cerrarSession()}"  class="logout" />
+                                        </p:menubar>
+                                    </h:form>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="sidebar-nav" class="sidebar">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/Farmacia/faces/views/admin/dashboard.xhtml" id="aDashboard" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>	
+                        <li><a href="/Farmacia/faces/views/admin/clientes.xhtml" id="aClientes"  class=""><i class="lnr lnr-smile"></i> <span>Clientes</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/proveedores.xhtml" id="aProveedores" class=""><i class="lnr lnr-apartment"></i> <span>Proveedores</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/productos.xhtml" id="aProductos" class=""><i class="lnr lnr-funnel"></i> <span>Productos</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/empleados.xhtml" id="aEmpleados" class=""><i class="lnr lnr-users"></i> <span>Empleados</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/ventas.xhtml" id="aVentas" class="" ><i class="lnr lnr-tag"></i><span>Ventas</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/compras.xhtml" id="aCompras" class="" ><i class="lnr lnr-cart"></i><span>Compras</span></a></li>
+                        <li><a href="/Farmacia/faces/views/admin/reporte.xhtml" id="aReportes" class="" ><i class="lnr lnr-printer"></i><span>Reportes</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main">
+                <div class="main-content">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+    <h:outputScript name="/assets/vendor/bootstrap/js/bootstrap.min.js"/>
+    <h:outputScript name="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"/>
+    <h:outputScript name="/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"/>
+    <h:outputScript name="/assets/vendor/chartist/js/chartist.min.js"/>
+    <h:outputScript name="/assets/scripts/klorofil-common.js"/>
+
+    
+    <script language="es" charset="utf-8" type="text/javascript">
+        $(document).ready(function(){
+            $('.logout').on('click', function () {
+                setTimeout(function () {
+                    $(window).attr('location', '/Farmacia/');
+                }, 1500);
+            });
+            
+            $(function(){
+                switch(window.location.pathname){
+                    case('/Farmacia/faces/views/admin/dashboard.xhtml'):
+                        $('#aDashboard').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/clientes.xhtml'):
+                        $('#aClientes').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/proveedores.xhtml'):
+                        $('#aProveedores').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/empleados.xhtml'):
+                        $('#aEmpleados').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/productos.xhtml'):
+                        $('#aProductos').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/ventas.xhtml'):
+                        $('#aVentas').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/compras.xhtml'):
+                        $('#aCompras').addClass('active');
+                        break;
+                    case('/Farmacia/faces/views/admin/reporte.xhtml'):
+                        $('#aReportes').addClass('active');
+                        break;
+                }
+            })
+        });
+        
+        
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'Mi', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+    </script>
+</html>
+

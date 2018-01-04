@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Farmacia Esperanza | Tu salud es lo primero</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900"/>
+        <link rel="stylesheet" href="/Farmacia/resources/css/login.css"/>
+        <link rel="icon" type="image/png" href="/Farmacia/resources/imgs/logo.png"/>
+        <style>
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+            .alert .glyphicon{
+                display:table-cell;
+            }
+            .alert div,
+            .alert span{
+                padding-left: 5px;
+                display:table-cell;
+            }
+            #container {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .alert {
+                padding: 8px 35px 8px 14px;
+                margin-bottom: 18px;
+                color: #c09853;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+                background-color: #fcf8e3;
+                border: 1px solid #fbeed5;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+
+            .alert-heading {
+                color: inherit;
+            }
+
+            .alert .close {
+                position: relative;
+                top: -2px;
+                right: -21px;
+                line-height: 18px;
+            }
+            .alert-danger,
+            .alert-error{
+                color: #b94a48;
+                background-color: #f2dede;
+                border-color: #eed3d7;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="pen-title">
+            <h1 style="background-color: rgba(0,0,0,0.4); padding: 15px;">Farmacia Esperanza</h1>
+            <p style="font-size: 25px; ">Tu salud es lo primero</p>
+        </div>
+<!--        <div class="container">
+            <h:messages id="messages" showSummary="false" showDetail="true"/>
+        </div>-->
+
+        <div class="container">
+            <div class="card"></div>
+            <div class="card">
+                <h1 class="title">Login</h1>
+                <h:form id="formLogin">
+                    <p:growl id="mensaje"  showDetail="true" life="3000" />
+
+                    <div class="input-container">
+
+                        <p:inputText id="usuario" value="#{loginController.usuario.usuario }" placeholder="Usuario" required="true" 
+                                     label="username" requiredMessage="Usuario requerido" />
+
+                        <div class="bar"></div>
+                    </div>
+                    <div class="input-container">
+                        <p:password id="password" value="#{loginController.usuario.clave }" placeholder="Password" required="true"
+                                    label="password" requiredMessage="Clave requerida" />
+                        <div class="bar"></div>
+                    </div>
+                    <div class="button-container">
+                        <p:commandButton value="Ingresar" update="mensaje" action="#{loginController.login() }" ajax="false"/>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>

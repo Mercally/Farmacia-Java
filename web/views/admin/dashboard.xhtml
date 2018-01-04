@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="../templates/Template.xhtml">
+            <ui:define name="content">
+                <!--<h:graphicImage value = "../../resources/imgs/medicina.jpg"/>-->
+                <p:panelGrid>
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column><h1>Farmacia Esperanza</h1></p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            ¡Bienvenido! usted se encuentra en el panel principal del sistema. Aquí encuentra la descripción de cada módulo,
+                            la información relevante y qué funciones tiene cada uno de ellos. Sientase a gusto de navegar por el sistema y disfrute de ello.
+                            <br />
+                            <br />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                
+                <p:panelGrid columns="2" layout="grid">
+                    <p:panel header="Clientes" footer="Total clientes: #{clientesController.CuentaClientes()} - Femenino: #{clientesController.CuentaClientes('F')} - Masculino: #{clientesController.CuentaClientes('M')}" toggleable="true">
+                        Mantenimiento de clientes del sistema. Usted podrá consultar los clientes existentes, modificar y eliminar
+                        la información de cada uno de ellos.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/clientes.xhtml"><i class="lnr lnr-smile"></i>&nbsp;Clientes</a>
+                    </p:panel>
+                    
+                    <p:panel header="Proveedores" footer="Total proveedores: #{proveedoresController.CuentaProveedores()}" toggleable="true">
+                        Mantenimiento de proveedores del sistema. Usted podrá consultar los proveedores existentes, modificar y eliminar
+                        la información de cada uno de ellos.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/proveedores.xhtml"><i class="lnr lnr-apartment"></i>&nbsp;Proveedores</a>
+                    </p:panel>
+                    
+                    <p:panel header="Productos" footer="Total productos: #{productosController.CuentaProductosExistentes(-1)} - Con existencias: #{productosController.CuentaProductosExistentes(1)} - Sin existencias: #{productosController.CuentaProductosExistentes(0)}" toggleable="true">
+                        Mantenimiento de productos de la farmacia. Usted podrá consultar los productos que se ofrecen, modificar y eliminar
+                        la información de cada uno de ellos.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/productos.xhtml"><i class="lnr lnr-funnel"></i>&nbsp;Productos</a>
+                    </p:panel>
+                    
+                    <p:panel header="Empleados" footer="Total empleados: #{empleadosController.CuentaEmpleados()} - Activos: #{empleadosController.CuentaEmpleados(1)} - Inactivos: #{empleadosController.CuentaEmpleados(0)}" toggleable="true">
+                        Mantenimiento de empleados de la farmacia Experanza. Usted podrá consultar los Empleados existentes, modificar y eliminar
+                        la información de cada uno de ellos.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/empleados.xhtml"><i class="lnr lnr-users"></i>&nbsp;Empleados</a>
+                    </p:panel>
+                    
+                    <p:panel header="Ventas" footer="Total ventas: #{ventasController.CuentaVentas()} - Ventas totales: $ #{ventasController.SumaTotalVentas().floatValue()}" toggleable="true">
+                        Mantenimiento de todas ventas realizadas. Usted podrá consultar los datos existentes de las ventas, modificar y eliminar
+                        la información de cada una.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/ventas.xhtml"><i class="lnr lnr-tag"></i>&nbsp;Ventas</a>
+                    </p:panel>
+                    <p:panel header="Compras" toggleable="true">
+                        Modulo de Compras del sistema. Usted podrá agregar items al carrito de compras y completar la compra por medio de 
+                        una factura provisional, al presionar el boton comprar, se agrega los detalles a la base de datos.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/compras.xhtml"><i class="lnr lnr-cart"></i>&nbsp;Compras</a>
+                    </p:panel>
+                    <p:panel header="Reportes" toggleable="true" footer="Total reportes: 3">
+                        Modulo de Reportes del sistema. Usted podrá consultar los reportes de los empleados, ventas por empleados y existensias de los productos, y si lo desea tambien puede imprimir los detalles desde el PDF.
+                        <br />
+                        <br />
+                        <a href="/Farmacia/faces/views/admin/reporte.xhtml"><i class="lnr lnr-printer"></i>&nbsp;Reportes</a>
+                    </p:panel>
+                </p:panelGrid>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

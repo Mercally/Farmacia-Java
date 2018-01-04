@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body>
+        <ui:composition template="./../templates/Template.xhtml">
+            <ui:define name="content">
+                <div class="panel panel-headline">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Mantenimiento de Clientes</h2>
+                    </div>
+                    <h:form>
+                        <p:commandButton value="Agregar Cliente" actionListener="#{clientesController.limpiarCliente()}" 
+                                         oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                        <p:separator/>
+                    </h:form>
+                    <h:form id="formClientes">
+                        <p:dataTable id="tablaClientes" paginator="true" paginatorPosition="bottom" rows="10" var="clientes" 
+                                     value="#{clientesController.listaClientes}" emptyMessage="No existen clientes">
+
+                            <p:column headerText="NOMBRE COMPLETO">
+                                <h:outputText value="#{clientes.nombre}  #{clientes.apellido}"/>
+                            </p:column>
+
+                            <p:column headerText="GNR" width="5%">
+                                <h:outputText value="#{clientes.genero}"/>
+                            </p:column>
+
+                            <p:column headerText="TELEFONO" width="12%">
+                                <h:outputText value="#{clientes.telefono}"/>
+                            </p:column>
+
+                            <p:column headerText="CIUDAD" width="15%">
+                                <h:outputText value="#{clientes.ciudad}"/>
+                            </p:column>
+
+                            <p:column headerText="EMAIL">
+                                <h:outputText value="#{clientes.correoElectronico}"/>
+                            </p:column>
+
+                            <p:column headerText="FECHA INGRESO" width="11%">
+                                <h:outputText value="#{clientes.fechaIngreso}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" locale="ES" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="ACCIONES" style="text-align: center" width="13%">
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{clientesController.cliente}" value="#{clientes}"/>
+                                </p:commandButton>&nbsp;&nbsp;
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{clientesController.cliente}" value="#{clientes}" />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formAgregar">
+                        <p:dialog id="dlgAgregar" header="Agregar Cliente" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" 
+                                  hideEffect="explode" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">
+
+                                <p:outputLabel value="Nombre:"/>
+                                <p:inputText value="#{clientesController.cliente.nombre}"/>
+
+                                <p:outputLabel value="Apellido:"/>
+                                <p:inputText value="#{clientesController.cliente.apellido}"/>
+
+                                <p:outputLabel value="Genero:" />
+                                <h:selectOneRadio value="#{clientesController.cliente.genero}">
+                                    <f:selectItem itemValue="M" itemLabel="Masculino" />
+                                    <f:selectItem itemValue="F" itemLabel="Femenino" />
+                                </h:selectOneRadio>
+
+                                <p:outputLabel value="Telefono:" />
+                                <p:inputText value="#{clientesController.cliente.telefono}"/>
+
+                                <p:outputLabel value="Fecha Ingreso:" />
+                                <p:calendar value="#{clientesController.cliente.fechaIngreso}"      locale="es"  disabled="true"/>
+
+                                <p:outputLabel value="Email"/>
+                                <p:inputText value="#{clientesController.cliente.correoElectronico}"/>
+
+                                <p:outputLabel value="Ciudad"/>
+                                <p:inputText value="#{clientesController.cliente.ciudad}"/>
+
+                                <p:outputLabel value="Domicilio:"/>
+                                <p:inputText value="#{clientesController.cliente.domicilio}"/>
+
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{clientesController.agregarCliente()}" 
+                                              update=":formClientes:tablaClientes" oncomplete="PF('dialogoAgregar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formModificar">
+                        <p:dialog id="dlgModificar" header="Modificar Cliente" widgetVar="dialogoModificar" resizable="false" 
+                                  showEffect="fade" hideEffect="explode" modal="true">
+
+                            <p:panelGrid columns="2" style="margin: 0 auto;">
+
+                                <p:outputLabel value="Nombre:"/>
+                                <p:inputText value="#{clientesController.cliente.nombre}"/>
+
+                                <p:outputLabel value="Apellido:"/>
+                                <p:inputText value="#{clientesController.cliente.apellido}"/>
+
+                                <p:outputLabel value="Genero:"/>
+                                <h:selectOneRadio value="#{clientesController.cliente.genero}" validatorMessage="Gender is required">
+                                    <f:selectItem itemValue="M" itemLabel="Masculino" />
+                                    <f:selectItem itemValue="F" itemLabel="Femenino" />
+                                    <f:validateRequired/>
+                                </h:selectOneRadio>
+
+                                <p:outputLabel value="Telefono:"/>
+                                <p:inputText value="#{clientesController.cliente.telefono}"/>
+
+                                <p:outputLabel value="Fecha Ingreso:"/>
+                                <p:calendar value="#{clientesController.cliente.fechaIngreso}"      locale="es"  disabled="true"/>
+
+                                <p:outputLabel value="Email"/>
+                                <p:inputText value="#{clientesController.cliente.correoElectronico}"/>
+
+                                <p:outputLabel value="Ciudad"/>
+                                <p:inputText value="#{clientesController.cliente.ciudad}"/>
+
+                                <p:outputLabel value="Domicilio:"/>
+                                <p:inputText value="#{clientesController.cliente.domicilio}"/>
+
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{clientesController.modificarCliente()}" 
+                                              update=":formClientes:tablaClientes" oncomplete="PF('dialogoModificar').hide();"/>
+
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEliminar">
+                        <p:dialog id="dlgEliminar" header="Eliminar Cliente" widgetVar="dialogoEliminar" resizable="false"
+                                  showEffect="fade" hideEffect="explode" modal="true">
+
+                            <h:outputText value="Desea eliminar este registro?"/>
+
+                            <p:commandButton  value="Si" actionListener="#{clientesController.eliminarCliente()}" 
+                                              update=":formClientes:tablaClientes" oncomplete="PF('dialogoEliminar').hide();"/>
+                            <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                        </p:dialog>
+                    </h:form>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

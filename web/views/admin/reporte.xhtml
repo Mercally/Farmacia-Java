@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <body>
+        <ui:composition template="./../templates/Template.xhtml">
+
+            <ui:define name="content">
+                
+                <h:form>      
+                <p:panelGrid>
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column><h1>Reportes de Farmacia Esperanza</h1></p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            ¡Bienvenido! usted se encuentra en el panel de reportes del sistema. Aquí encuentra la descripción de cada módulo,
+                            la información relevante y qué funciones tiene cada uno de ellos. Sirvase generar los reportes deseados.
+                            <br />
+                            <br />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <p:panelGrid columns="3" layout="grid">
+                    
+                    <p:panel header="Reporte de Existencias" footer="Total productos: #{productosController.CuentaProductosExistentes(-1)} - Con existencias: #{productosController.CuentaProductosExistentes(1)} - Sin existencias: #{productosController.CuentaProductosExistentes(0)}" toggleable="true">
+                        Reporte de existencias de productos. al dar click en generar reporte, usted podra ver los detalles en una nueva pestaña.
+                        <br />
+                        <br />
+                       <h:commandLink target="_blank" action="#{reportesController.verReporteExistencias()}">
+                           <i class="lnr lnr-funnel" style="color: blue; font-size: 110%">&nbsp;Generar reporte de Existencias</i>
+                       </h:commandLink>
+                    </p:panel>
+                    
+                    <p:panel header="Reporte de ventas por Empleado" footer="Total ventas: #{ventasController.CuentaVentas()} - Ventas totales: $ #{ventasController.SumaTotalVentas().floatValue()}" toggleable="true">
+                        Reporte de ventas por Empleado. seleccione las fechas que desea consultar y luego al dar click en generar reporte, usted podra ver los detalles en una nueva pestaña.
+                        <br />
+                        <br />
+                        <p:panelGrid columns="2" style="margin: 0 auto;">
+                            <p:outputLabel value="Fecha Desde"/>
+                            <p:calendar value="#{reportesController.desde}" pattern="dd/MM/yyyy"   locale="es"/>
+                            <p:outputLabel value="Fecha Hasta"/>
+                            <p:calendar value="#{reportesController.hasta}" pattern="dd/MM/yyyy"  locale="es"/>
+                        </p:panelGrid>
+                        
+                        <br />
+                        <br />
+                        <h:commandLink target="_blank" action="#{reportesController.verReporteVentas()}">
+                            <i class="lnr lnr-tag" style="color: blue; font-size: 110%">&nbsp;Generar reporte ventas por empleado</i>
+                        </h:commandLink>
+                    </p:panel>
+                    
+                    <p:panel header="Reporte de Empleados" footer="Total empleados: #{empleadosController.CuentaEmpleados()} - Activos: #{empleadosController.CuentaEmpleados(1)} - Inactivos: #{empleadosController.CuentaEmpleados(0)}" toggleable="true">
+                        Reporte de Empleados, aqui se puede apreciar los detalles
+                      de cuales son las existencias de productos en la farmacia
+                        <br />
+                        <br />
+                        
+                       <h:commandLink target="_blank" action="#{reportesController.verReporteEmpleados()}">
+                           <i class="lnr lnr-users" style="color: blue; font-size: 110%">&nbsp;Generar reporte Empleados</i>
+                       </h:commandLink>
+                        
+                    </p:panel>
+                    
+                </p:panelGrid>
+                    
+                     </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
