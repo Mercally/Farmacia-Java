@@ -1,0 +1,123 @@
+package ReportesUtil;
+
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import java.util.Date;
+
+
+public class ReportesDao {
+    
+    public void getReporte(String ruta) 
+	throws  ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        Connection conexion;
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        conexion = DriverManager.getConnection("jdbc:mysql://185.2.168.78:3306/mtechwor_prograiv", "mtechwor_progra", "ProgrAbc.");
+
+        //Se definen los parametros si es que el reporte necesita
+        Map parameter = new HashMap();
+
+        try {
+            File file = new File(ruta);
+
+            HttpServletResponse httpServletResponse = 
+			(HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.addHeader("Content-Type", "application/pdf");
+
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(file.getPath());
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conexion);
+
+            JRExporter jrExporter = null;                      
+            jrExporter = new JRPdfExporter();
+            jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, httpServletResponse.getOutputStream());
+
+            if (jrExporter != null) {
+                try {
+                    jrExporter.exportReport();
+                } catch (JRException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    /**
+     *
+     * @param ruta
+     * @param desde
+     * @param hasta
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws SQLException
+     */
+    public void getReporteVentas(String ruta, Date desde, Date hasta) 
+	throws  ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        Connection conexion;
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        conexion = DriverManager.getConnection("jdbc:mysql://185.2.168.78:3306/mtechwor_prograiv", "mtechwor_progra", "ProgrAbc.");
+
+        //Se definen los parametros si es que el reporte necesita
+        Map parameter = new HashMap();
+        parameter.put("desde", desde);
+        parameter.put("hasta", hasta);
+
+        try {
+            File file = new File(ruta);
+
+            HttpServletResponse httpServletResponse = 
+			(HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.addHeader("Content-Type", "application/pdf");
+
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(file.getPath());
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conexion);
+
+            JRExporter jrExporter = null;                      
+            jrExporter = new JRPdfExporter();
+            jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, httpServletResponse.getOutputStream());
+
+            if (jrExporter != null) {
+                try {
+                    jrExporter.exportReport();
+                } catch (JRException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}

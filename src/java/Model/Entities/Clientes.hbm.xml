@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-29-2017 08:34:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Entities.Clientes" table="clientes" catalog="mtechwor_prograiv" optimistic-lock="version">
+        <id name="clienteId" type="java.lang.Integer">
+            <column name="clienteId" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50">
+                <comment>Nombre del cliente.</comment>
+            </column>
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="50">
+                <comment>Almacena el apellido</comment>
+            </column>
+        </property>
+        <property name="genero" type="java.lang.Character">
+            <column name="genero" length="1">
+                <comment>Genero M o F</comment>
+            </column>
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="8">
+                <comment>Telefono del cliente.</comment>
+            </column>
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fechaIngreso" length="10" />
+        </property>
+        <property name="correoElectronico" type="string">
+            <column name="correoElectronico" length="50">
+                <comment>Correo electronico del cliente.</comment>
+            </column>
+        </property>
+        <property name="ciudad" type="string">
+            <column name="ciudad" length="45">
+                <comment>Ciudad a la que pertenece actualmente el cliente.</comment>
+            </column>
+        </property>
+        <property name="domicilio" type="string">
+            <column name="domicilio" length="250">
+                <comment>Domicilio exacto del cliente.</comment>
+            </column>
+        </property>
+        <set name="ventases" table="ventas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clienteId" not-null="true">
+                    <comment>Almacena la llave foranea con el cliente.</comment>
+                </column>
+            </key>
+            <one-to-many class="Model.Entities.Ventas" />
+        </set>
+    </class>
+</hibernate-mapping>

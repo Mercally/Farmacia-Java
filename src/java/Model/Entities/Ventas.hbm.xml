@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-29-2017 08:34:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Entities.Ventas" table="ventas" catalog="mtechwor_prograiv" optimistic-lock="version">
+        <id name="ventaId" type="java.lang.Integer">
+            <column name="ventaId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clientes" class="Model.Entities.Clientes" fetch="select">
+            <column name="clienteId" not-null="true">
+                <comment>Almacena la llave foranea con el cliente.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="empleados" class="Model.Entities.Empleados" fetch="select">
+            <column name="empleadoId" not-null="true">
+                <comment>Almacena el empleado que efectuo la venta.</comment>
+            </column>
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="45" not-null="true">
+                <comment>Almacena un correlativo de la venta.</comment>
+            </column>
+        </property>
+        <property name="totalVenta" type="big_decimal">
+            <column name="totalVenta" precision="8" />
+        </property>
+        <property name="fechaVenta" type="timestamp">
+            <column name="fechaVenta" length="19" not-null="true">
+                <comment>Almacena la fecha en que se efectuo la venta.</comment>
+            </column>
+        </property>
+        <set name="detalleventases" table="detalleventas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ventaId" not-null="true">
+                    <comment>Almacena la venta al que pertenece el detalle.</comment>
+                </column>
+            </key>
+            <one-to-many class="Model.Entities.Detalleventas" />
+        </set>
+    </class>
+</hibernate-mapping>

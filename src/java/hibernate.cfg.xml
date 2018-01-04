@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://185.2.168.78:3306/mtechwor_prograiv?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">mtechwor_progra</property>
+    <property name="hibernate.connection.password">ProgrAbc.</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
+    <mapping resource="Model/Entities/Empleados.hbm.xml"/>
+    <mapping resource="Model/Entities/Productos.hbm.xml"/>
+    <mapping resource="Model/Entities/Detalleventas.hbm.xml"/>
+    <mapping resource="Model/Entities/Clientes.hbm.xml"/>
+    <mapping resource="Model/Entities/Ventas.hbm.xml"/>
+    <mapping resource="Model/Entities/Proveedores.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

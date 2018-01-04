@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-29-2017 08:34:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Entities.Detalleventas" table="detalleventas" catalog="mtechwor_prograiv" optimistic-lock="version">
+        <id name="detalleVentaId" type="java.lang.Integer">
+            <column name="detalleVentaId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="productos" class="Model.Entities.Productos" fetch="select">
+            <column name="productoId" not-null="true">
+                <comment>Almacena el producto que se vendio.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="ventas" class="Model.Entities.Ventas" fetch="select">
+            <column name="ventaId" not-null="true">
+                <comment>Almacena la venta al que pertenece el detalle.</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true">
+                <comment>Almacena la cantidad de producto que se vendio.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
