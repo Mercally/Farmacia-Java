@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e2e8187-0889-4305-8c62-2bb3ab90eda1">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from empleados;]]>
+	</queryString>
+	<field name="empleadoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Correlativo en DB del empleado.]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[Codigo del empleado determinado por el sistema.]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre natural del empleado.]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="genero" class="java.lang.String">
+		<fieldDescription><![CDATA[Almacena F si es mujer y M si es hombre.]]></fieldDescription>
+	</field>
+	<field name="usuario" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<fieldDescription><![CDATA[Almacena la ciudad del empleado.]]></fieldDescription>
+	</field>
+	<field name="fechaIngreso" class="java.sql.Date">
+		<fieldDescription><![CDATA[Almacena la fecha de ingreso del empleado.]]></fieldDescription>
+	</field>
+	<field name="domicilio" class="java.lang.String">
+		<fieldDescription><![CDATA[Almacena el domicilio exacto del empleado.]]></fieldDescription>
+	</field>
+	<field name="empleadoIdJefe" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Almacena la relacion de los empleados, determinando cual empleado es jefatura y cual subordinado.]]></fieldDescription>
+	</field>
+	<field name="activo" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Determina si el empleado esta activo o no.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="146" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="52" width="194" height="20" forecolor="#00CC33" uuid="a700ea92-d5d7-466c-904b-a5f04fb414cb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE EMPLEADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="15" width="263" height="37" forecolor="#009933" uuid="afcd4067-6050-4139-98d4-627cca7c3274"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FARMACIA ESPERANZA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="135" height="145" uuid="37f38fdc-4ee9-45b9-a020-18212579841b"/>
+				<imageExpression><![CDATA["C:\\Users\\Miguel\\Documents\\NetBeansProjects\\Farmacia\\Farmacia\\web\\reportes\\medVerde1.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="136" y="91" width="263" height="43" uuid="bcb74b47-2e16-469e-ad36-58810fda754a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Este reporte nos sirve para ver el registro de todos los empleados que la empresa tiene actualmente, asi como tambien saber si estan activos o no.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="399" y="0" width="148" height="145" uuid="6cfeb355-dc5a-4a15-82d0-8df216c37cfc"/>
+				<imageExpression><![CDATA["C:\\Users\\Miguel\\Documents\\NetBeansProjects\\Farmacia\\Farmacia\\web\\reportes\\medVerde2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="20" forecolor="#FF6600" uuid="17368958-e581-44e7-bce1-2c981ce2a515"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="94" height="20" forecolor="#FF6600" uuid="355bcbf1-2162-4c80-97b8-6e6024295bd6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="0" width="97" height="20" forecolor="#FF6600" uuid="53ad55a2-c4ac-41d1-a32a-685082533f6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="0" width="50" height="20" forecolor="#FF6600" uuid="b01de54e-fa7e-4dd6-834a-4b84155255c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="0" width="100" height="20" forecolor="#FF6600" uuid="5906474a-8dc7-432b-acd9-70d0c3b9aef9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciudad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="103" height="20" forecolor="#FF6600" uuid="457bbed2-6ee8-4036-9ca6-70cb80492294"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FechaIngreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="0" width="57" height="20" forecolor="#FF6600" uuid="9b0bda21-62c7-41da-ad0e-a66e52d4ea1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Activo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="3" width="53" height="20" uuid="29767b34-f062-4e13-a36f-a778efb376be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="3" width="94" height="20" uuid="ecfdd755-008f-47fc-8a78-352324e0bed0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="3" width="98" height="20" uuid="d1b7eae5-0803-4806-89e1-e26890c73476"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="3" width="50" height="20" uuid="7cf8cd99-17c2-4251-96c5-1590e326a969"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="3" width="101" height="20" uuid="c052b65d-71f7-4ac1-bb23-12cf375fe94d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="3" width="103" height="20" uuid="87cd8c95-dcb1-4a53-8b3a-ec0474074d99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaIngreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="498" y="3" width="57" height="20" uuid="22915e9e-8118-43be-8c55-803fbe6846fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[( $F{activo} ? "Si" : "No" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="16" y="8" width="166" height="20" forecolor="#006600" uuid="d790cf07-e374-4dba-9bc5-efb18f019e07"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="8" width="80" height="20" uuid="378eb6cc-5ec5-43bb-a6e6-15858a24ca5f"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="294" y="8" width="40" height="20" uuid="beb143a3-ec74-4322-b200-c9dc5f1a3abb"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
